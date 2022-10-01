@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string encryptData(string plainText,int key){
+    string eData="";
+    for(int i = 0; i < plainText.size(); i++){
+        if(plainText[i] >= 'A' && plainText[i] <= 'Z') eData += char( int(plainText[i] + key - 65) %26 + 65);  
+        if(plainText[i] >= 'a' && plainText[i] <= 'z') eData += char( int( plainText[i] + key - 97) %26 + 97);
+    }
+    return eData;
+}
+
+string decryptData(string cText,int key){
+    string eData="";
+    if(key > 26 ) key = key % 26;
+    for(int i = 0; i < cText.size(); i++){
+        if(cText[i] >= 'A' && cText[i] <= 'Z') eData += char(int( (cText[i] - 'A' - key) + 26) % 26 + 65);  
+        if(cText[i] >= 'a' && cText[i] <= 'z') eData += char(int( (cText[i] - 'a' - key) + 26) % 26 + 97);
+    }
+    return eData;
+}
+
+int main(){
+    string plainText;
+    int key;
+    cout<<"Enter Key: ";
+    cin>>key;
+
+    fstream output; //For writing output which is encrypted data and input for decrypt data
+    ifstream input("testCases.txt"); //For getting input from the file
+    ofstream decrypt("DecryptData.txt"); //For writing the decrypted data 
+
+    output.open ("EncryptedData.txt",ios::out);
+    while ( getline (input,plainText) ) output<<encryptData(plainText,key)<<endl;
+    output.close();
+    output.open ("EncryptedData.txt",ios::in);
+    while ( getline (output,plainText) ) decrypt<<decryptData(plainText,key)<<endl;
+    
+    return 0;
+}
