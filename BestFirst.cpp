@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 13; //Number of nodes
-vector<pair<char, int>> graph_vector[N]; //store graph with it's child and their cost
-vector<char> nodes = {'S','A','B','C','D','H','L','F','G','I','J','K','E'}; // Nodes identifiers
+const int N = 13; //Total Number of nodes
+vector<pair<char, int>> graph_vector[N]; //store graph with it's child and their cost or Weight
+vector<char> nodes = {'S','A','B','C','D','H','L','F','G','I','J','K','E'}; //All Nodes identifiers
 
 //Graph
 unordered_map<char,vector<pair<char,int>>> graph = { //pattern {node, {{child, weight}}, {node, {{child, weight}}, ...}
@@ -37,7 +37,7 @@ unordered_map<char,int> heuristic = {
    {'E',0},
 };
 
-//Global method to Print graph
+//Global Public method to Print graph
 void print_graph(){
    for (int u=0; u<N; u++) {
       cout << "Node = " << nodes[u]<<"\tHeuristic value: " <<heuristic[nodes[u]] <<"\nNeighbors:\n";
@@ -63,6 +63,7 @@ class BestFirstSearch{
          }
          cout<<"\nTotal Cost: "<<cost;
       }
+   
    public:
       //Pass the goal node in constructor
       BestFirstSearch(char gn){
@@ -87,7 +88,6 @@ class BestFirstSearch{
             // for(auto i : open) cout<<i.first<<" "<<i.second<<"\t";
             // cout<<"\n\nClose  :: ";
             // for(auto i :close) cout<<i<<" ";
-
 
             //if theb goal state found the path from initial node to goal node is going to be print
             if(open.begin()->first == goal){
