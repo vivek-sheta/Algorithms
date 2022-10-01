@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class VRC{
+    private:
+    
+    string message;
+   
+    //Doing padding based on the counter of 1
+    bool checkEven(string data){
+        bool flag = false;
+        int track = 0;
+        for(int i = 0; data[i] != '\0' ; i++)
+            if(data[i] == 49) ++track; 
+
+        if(track % 2) return false;
+        else return true;
+    }
+
+    //For sender to add the padding
+    string doPadding(string data){
+        if(!checkEven(data)) data += "1";
+        else data += "0";
+        return data;
+    }
+
+    //For reciver to check the error occured or not
+    bool checkPadding(string data){
+        for(int i = 0; data[i] != '\0' ; i++)
+            if(!checkEven(data)) return true;
+        return false;
+    }
+
+    public:
+
+    bool reciver(string data){
+        for(int i = 0; i < data.size(); i++){
+            if(checkPadding(data)){
+                cout<<"Error occurred in message";
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void sender(){    
+        cout<<"Enter Message : ";
+        cin>>message;
+        char temp[8];
+        string buffer[message.size()];
+
+        for(int i = 0; i < message.size(); i++){
+            itoa(message[i], temp , 2);
+            buffer[i] = temp;
+        }
+        cout<<"Frame Before Padding : ";
+        for(int i = 0; i < message.size(); i++) cout<<buffer[i]<<"  ";
+
+        cout<<"\nFrame After Padding : ";
+        for(int i = 0 ; i < message.size(); i++){
+            buffer[i] = doPadding(buffer[i]);
+            cout<<buffer[i]<<" ";
+        }
+    
+        //sendData
+        for(int i = 0; i < message.size(); i++) if(!reciver(buffer[i])) return;
+
+        cout<<"\nMesage Recived Sucessfully"<<endl;
+    }
+};
+
+
+int main(){
+    VRC *obj = new VRC();
+    obj->sender();
+    delete obj;
+    return 0;
+}
