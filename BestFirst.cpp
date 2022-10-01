@@ -6,7 +6,7 @@ vector<pair<char, int>> graph_vector[N]; //store graph with it's child and their
 vector<char> nodes = {'S','A','B','C','D','H','L','F','G','I','J','K','E'}; // Nodes identifiers
 
 //Graph
-unordered_map<char,vector<pair<char,int>>> graph = { //pattern {node, {{child, weight}}...}
+unordered_map<char,vector<pair<char,int>>> graph = { //pattern {node, {{child, weight}}, {node, {{child, weight}}, ...}
    {'S', { {'A',7}, {'B',2}, {'C',3} } },
    {'A', { {'B',3}, {'D',4} } },
    {'B', { {'D',4}, {'H',1} } },
