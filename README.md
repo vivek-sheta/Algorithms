@@ -1,2 +1,2 @@
 # Algorithms
-Different algorithms.
+Different topic and related algorithms.
