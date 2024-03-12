@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+//FUNCTION: Encrypt the data
 string encryptData(string plainText,int key){
-    string eData="";
+    string eData=""; //Empty string to store the Encrypted data
     for(int i = 0; i < plainText.size(); i++){
         if(plainText[i] >= 'A' && plainText[i] <= 'Z') eData += char( int(plainText[i] + key - 65) %26 + 65);  
         if(plainText[i] >= 'a' && plainText[i] <= 'z') eData += char( int( plainText[i] + key - 97) %26 + 97);
@@ -10,9 +10,10 @@ string encryptData(string plainText,int key){
     return eData;
 }
 
+//FUNCTION: Decrypt the data 
 string decryptData(string cText,int key){
-    string eData="";
-    if(key > 26 ) key = key % 26;
+    string eData=""; //Empty string for store decrypted data
+    if(key > 26 ) key = key % 26;  //Set the key in the range 0-25 by calculating ( mod % 26 ) of original key
     for(int i = 0; i < cText.size(); i++){
         if(cText[i] >= 'A' && cText[i] <= 'Z') eData += char(int( (cText[i] - 'A' - key) + 26) % 26 + 65);  
         if(cText[i] >= 'a' && cText[i] <= 'z') eData += char(int( (cText[i] - 'a' - key) + 26) % 26 + 97);
